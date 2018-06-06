@@ -14,8 +14,8 @@ resource "aws_instance" "terraform" {
     Team = "Geeks"
   }
     provisioner "file" {
-    source      = "/Users/jayagopal.reddy/Documents/Scripts/terraform/ansible.yml"
-    destination = "/home/ubuntu/ansible.yml"
+    source      = "/Users/jayagopal.reddy/Documents/Scripts/terraform/harden.yml"
+    destination = "/home/ubuntu/harden.yml"
   
     connection {
       user     = "ubuntu"
@@ -26,7 +26,7 @@ resource "aws_instance" "terraform" {
   }
   
     provisioner "remote-exec" {
-    inline = "ansible-playbook /home/ansible/ansible.yml"
+    inline = "ansible-playbook /home/ansible/harden.yml"
     connection {
       user     = "ubuntu"
       private_key  = "${file("/Users/jayagopal.reddy/Documents/Scripts/terraform/jenkins.pem")}"
