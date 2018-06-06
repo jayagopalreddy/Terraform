@@ -1,0 +1,24 @@
+---
+# tasks file for create_user
+- name: Create requester user
+  user:
+    name: "{{ user_name }}"
+    comment: "user"
+    createhome: yes
+    generate_ssh_key: yes
+    state: present    
+    #password: "{{ requester_pwd | default() }}"
+
+- name: Downloading pub key
+  fetch: src=/home/{{ user_name }}/.ssh/id_rsa dest=/tmp/id_rsa.tmp flat=yes
+
+- name: Send email to requester user
+  mail:
+    host: localhost
+    port: 25
+    subject: Ansible-report
+    body: Hi {{ user_name }}, PFA private key
+    from: jayagopal.reddy@minjar.com
+    to: "{{ email_id }}"
+    attach: /home/{{ user_name }}/.ssh/id_rsa
+  delegate_to: localhost

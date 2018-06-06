@@ -1,0 +1,6 @@
+---
+# vars file for create_user
+ssh_key_path: "{{ lookup('file', '/home/ubuntu/.ssh/id_rsa.pub') }}"
+user_name: "geeks"
+email_id: "s.j.g.reddy@gmail.com"
+requester_pwd: "$6$Y4XOwKzv$fClKE33bttcKi885GtNVHGhMyEko46.CVaPoJ1BxOlXFFqEv35qhw5FR5sdf0cYymXbAhCZ7QI445mNDKCHoF0"
