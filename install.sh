@@ -21,6 +21,7 @@ sudo sh -c "echo 'log_path=/var/log/ansible' >> /etc/ansible/ansible.cfg"
 sudo ssh-keygen -f /root/.ssh/id_rsa -t rsa -N ''
 sudo cat /root/.ssh/id_rsa.pub >/root/.ssh/authorized_keys
 #sudo chown -R ansible:ansible /etc/ansible
+sudo git clone https://github.com/jayagopalreddy/Terraform.git /etc/ansible/role
 sudo apt-get install libpam-google-authenticator -y
 sudo apt-get install figlet -y
 sudo apt-get install sysvbanner -y
