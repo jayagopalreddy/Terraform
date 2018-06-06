@@ -1,0 +1,33 @@
+---
+# tasks file for hardening
+- name: change login port
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: 'Port 22'
+    line: 'Port 1922'
+- name: add configuration for session timeout
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    line: "{{ item }}"
+  with_items:
+    - "ClientAliveInterval 60"
+    - "ClientAliveCountMax 3"
+- name: create a file 
+  file:
+    path: /etc/motd
+    state: touch
+    owner: root
+    group: root
+- name: insert msg
+  blockinfile:
+    path: "{{ item.msg_path }}"
+    state: present
+#    marker: no
+    content: | 
+      {{ item.block }}
+  with_items:
+    - "{{ block_msg }}"
+- name: change login port
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    line: 'Banner /etc/issue.net'
